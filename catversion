@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+# Chase Pholdee-Kretschmar, cpho632, 208579690
+
+import os
+import sys 
+
+def main(filename, version_num):
+    root = os.path.join(os.getcwd(), ".versiondir")
+    version = os.path.join(root, filename + "." + version_num)
+    fd = os.open(version, os.O_RDONLY)
+    content = os.read(fd, os.path.getsize(version)).strip()
+    print(f"Contents of {filename}.{version_num}:")
+    print(content)
+    os.close(fd)
+
+main(sys.argv[1], sys.argv[2])

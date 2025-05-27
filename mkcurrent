@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+# Chase Pholdee-Kretschmar, cpho632, 208579690
+
+import os
+import sys
+import shutil
+
+def main(filename, version):
+    root = os.path.join(os.getcwd(), ".versiondir")
+    basefile = os.path.join(root, filename)
+    file = os.path.join(root, filename+".1")
+    if not os.path.isfile(file):
+        print("File does not exist")
+        return
+    file2 = os.path.join(root, filename+"."+str(version))
+    if not os.path.isfile(file2):
+        print("Version does not exist")
+        return
+    temp = os.path.join(root, filename + ".temp")
+    # copy of version 1
+    shutil.copy(file, temp)
+    v6_path = basefile + '.6'
+    v5_path = basefile + '.5'
+    v4_path = basefile + '.4'
+    v3_path = basefile + '.3'
+    v2_path = basefile + '.2'
+    os.rename(file2, basefile + ".1")
+    if os.path.isfile(v6_path):
+        os.remove(v6_path)
+    if os.path.isfile(v5_path):
+        os.rename(v5_path, v6_path)
+    if os.path.isfile(v4_path):
+        os.rename(v4_path, v5_path)
+    if os.path.isfile(v3_path):
+        os.rename(v3_path, v4_path)
+    if os.path.isfile(v2_path):
+        os.rename(v2_path, v3_path)
+    os.rename(temp, v2_path)
+    
+
+    
+
+
+
+main(sys.argv[1], sys.argv[2])

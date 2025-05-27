@@ -1,0 +1,14 @@
+#!/usr/bin/python3
+# Chase Pholdee-Kretschmar, cpho632, 208579690
+
+import os
+import sys 
+import shutil
+
+def main():
+    root = os.path.join(os.getcwd(), ".versiondir")
+    shutil.rmtree(root)
+    os.system("fusermount -u mount")
+    print("Successfuly shut down and deleted versioning system.")
+
+main()
